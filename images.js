@@ -1,5 +1,4 @@
-export let tiles = {} //Image map obj
-export async function loadAllImages()
+export default async function loadAllImages()
 {
     let promises = [];
     for (const [key, value] of Object.entries(srcMap)){
@@ -27,5 +26,4 @@ function loadImage(url){
 
 let srcMap = {
     "tile": "img/tile.png"
-
 }

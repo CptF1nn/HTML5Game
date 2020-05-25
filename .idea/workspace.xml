@@ -21,10 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e722c59d-f643-4c24-a7a2-819e07ec6368" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/images.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/start.js" beforeDir="false" afterPath="$PROJECT_DIR$/start.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -56,6 +56,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunManager">
     <configuration name="main.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/main.js" working-dir="$PROJECT_DIR$">
@@ -81,7 +82,7 @@
       <workItem from="1589739268626" duration="384000" />
       <workItem from="1590252984674" duration="4268000" />
       <workItem from="1590257878083" duration="134000" />
-      <workItem from="1590416816213" duration="2675000" />
+      <workItem from="1590416816213" duration="4675000" />
     </task>
     <servers />
   </component>
@@ -105,6 +106,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="669" y="198" key="#main.js/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1590418640162" />
+    <state x="461" y="185" key="SettingsEditor" timestamp="1590420748466">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="461" y="185" key="SettingsEditor/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1590420748466" />
     <state x="616" y="250" key="run.anything.popup" timestamp="1589675878355">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

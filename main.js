@@ -1,7 +1,4 @@
-import {tiles, loadAllImages} from './images.js';
-let canvas, ctx;
-let actualSize , gameSize; //2D int array
-let ppu = 16, pixelScale = 4; //Ints
+import loadAllImages from './images.js';
 
 function sleep(ms){
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -23,12 +20,43 @@ async function loadGame(){
     await loadAllImages();
 }
 
-function render(){
-    for (let x = 0; x < gameSize[0]; x++){
-        for (let y = 0; y < gameSize[1]; y++){
-            ctx.drawImage(tiles["tile"], pixelPos(x), pixelPos(y), pixelSize(), pixelSize());
+function render() {
+    for (let x = 0; x < gameSize[0]; x++) {
+        for (let y = 0; y < gameSize[1]; y++) {
+            ctx.drawImage(tiles["tile"],
+                pixelPos(x) + cameraOffset[0],
+                pixelPos(y) + cameraOffset[1],
+                pixelSize(), pixelSize());
         }
     }
+}
+
+function moveCamera(vec) {
+    cameraOffset[0]+=vec[0];
+    cameraOffset[1]+=vec[1];
+}
+
+function checkInput(){
+    let inputVector = [0,0];
+    const input = {};
+    for (const key in currentKeys) {
+        const control = controls[key];
+        if (control) {
+            input[control] = true;
+        }
+    }
+    if (input["left"])
+        inputVector[0] -= 1;
+    if (input["right"])
+        inputVector[0] += 1;
+    if (input["up"])
+        inputVector[1] -= 1;
+    if (input["down"])
+        inputVector[1] += 1;
+    moveCamera(inputVector);
+
+    if (inputVector[0] !== 0 || inputVector[1] !== 0)
+        render();
 }
 
 export default async function run(){
@@ -41,9 +69,13 @@ export default async function run(){
     render();
     let i = 0;
     let fps = 60;
+
     while (1){
         i++;
         if (i >= fps) i = 0;
+        //Do this every frame
+        checkInput()
+
         await sleep(1000/fps);
     }
 }
