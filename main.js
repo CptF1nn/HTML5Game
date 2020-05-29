@@ -1,5 +1,5 @@
-import loadAllImages from './images.js';
-
+import {loadAllImages, loadMap, getTileFromColor} from './images.js';
+import * as mathUtil from "./mathUtil.js";
 function sleep(ms){
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -13,33 +13,43 @@ function pixelPos(pos){
 
 async function loadGame(){
     /*TODO:
-        Go through all images in img
-        Load images to dictionary
         gradually load-bar
      */
     await loadAllImages();
+    loadMap();
 }
 
 function render() {
-    for (let x = 0; x < gameSize[0]; x++) {
-        for (let y = 0; y < gameSize[1]; y++) {
-            ctx.drawImage(tiles["tile"],
-                pixelPos(x) + cameraOffset[0],
-                pixelPos(y) + cameraOffset[1],
+    //Clear context
+    ctx.clearRect(0,0, actualSize[0], actualSize[1]);
+
+    //Render background
+    for (let x = 0; x < imgMap["map"].width; x++) {
+        for (let y = 0; y < imgMap["map"].height; y++) {
+            let imgStr = getTileFromColor(tileMap[x][y]);
+            let imgVar = imgMap[imgStr];
+            ctx.drawImage(imgVar,
+                mathUtil.pixelPerfect(pixelPos(x) - cameraOffset[0]),
+                mathUtil.pixelPerfect(pixelPos(y) - cameraOffset[1]),
                 pixelSize(), pixelSize());
         }
     }
+    //Render player
+    ctx.drawImage(imgMap["ninja"], mathUtil.pixelPerfect((actualSize[0]/2)-(pixelSize()/2)), mathUtil.pixelPerfect((actualSize[1]/2)-(pixelSize()/2)), pixelSize(), pixelSize());
 }
 
 function moveCamera(vec) {
-    cameraOffset[0]+=vec[0];
-    cameraOffset[1]+=vec[1];
+    cameraOffset[0]+=vec[0] * characterVars.movementSpeed;
+    cameraOffset[1]+=vec[1] * characterVars.movementSpeed;
 }
 
 function checkInput(){
     let inputVector = [0,0];
     const input = {};
     for (const key in currentKeys) {
+        if (!currentKeys.hasOwnProperty(key) || !currentKeys[key]) {
+            continue;
+        }
         const control = controls[key];
         if (control) {
             input[control] = true;
@@ -53,7 +63,11 @@ function checkInput(){
         inputVector[1] -= 1;
     if (input["down"])
         inputVector[1] += 1;
+    inputVector = mathUtil.normalize(inputVector);
     moveCamera(inputVector);
+
+    if (input["reloadPage"])
+        window.location.reload(true);
 
     if (inputVector[0] !== 0 || inputVector[1] !== 0)
         render();
